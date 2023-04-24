@@ -6,6 +6,7 @@ import {Register} from "./register";
 import Medicinesfrontend from "./Components/Medicinesfrontend";
 import Profile from "./Components/Profile";
 import NavigationBar from "./Components/NavigationBar";
+import MedState from "./context/meds/Medstate";
 
 
 function App() {
@@ -24,15 +25,18 @@ function App() {
   return (
     
     <div className="App">
-      
+
+      <MedState>
       <Routes>
-        <Route path="/" element={<> <Login/></> } />
-      
+       <Route path="/" element={<> <Login/></> } />
+    
         <Route path="/register" element={ <Register/> } />
         <Route path="/profile" element={<>  <NavigationBar/> <Profile/></> } />
-        <Route path="/medicine" element={<>  <NavigationBar/> <Medicinesfrontend/></> } />
+        <Route path="/medicine" element={<> <NavigationBar/> <Medicinesfrontend/></> } />
+      
         
       </Routes>
+      </MedState>
     
     
     </div>

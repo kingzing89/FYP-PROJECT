@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import "../Styles/crud.css"
+import { Alert } from 'react-bootstrap';
 function Medicinesfrontend() {
   
  
@@ -21,14 +22,26 @@ function Medicinesfrontend() {
     };
     if(edit){
       //update user
-      let copy =users;
-      Object.assign(copy[active],user)
-      setUsers([...copy]);
-      setEdit(false);
-      setActive(null);
+      if(user.address=="" || user.medicinename=="" || user.price==""||user.quantity==""){
+        alert("Empty fields entered");
+      }
+      else{
+        let copy =users;
+        Object.assign(copy[active],user)
+        setUsers([...copy]);
+        setEdit(false);
+        setActive(null);
+
+      }
+      
     }else{
       //add user
+      if(user.address=="" || user.medicinename=="" || user.price==""||user.quantity==""){
+        alert("Empty fields entered");
+      }
+      else{
       setUsers([...users,user]);
+      }
     }
     setMed("");
     setPrice("");
@@ -61,8 +74,8 @@ function Medicinesfrontend() {
   }
 
   return (
-    <div className="App">
-      <h1><center>Add Medicines Page</center></h1>
+    <div className="Medpage">
+      <h1 ><center>Add Medicines</center></h1>
       <div className='container'>
        <div className='row justify-content-center'>
         <div className='col-xs-12 col-sm-10 col-md-8 col-lg-5'>
