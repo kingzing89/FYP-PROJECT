@@ -47,11 +47,12 @@ body('name', "invalid  user").isLength({ min: 3 }),
             }
           
         }
-        //res.json(user)
-        /*jwstSecret = "Fara*z";
+        
+        jwstSecret = "Fara*z";
+        
+        var authtoken = jwt.sign(data, jwstSecret);
         success=true;
-        var authtoken = jwt.sign(data, jwstSecret);*/
-        res.status(200).json(user)
+        res.status(200).json({success,authtoken});
         
     } catch (error) {
         success=false;

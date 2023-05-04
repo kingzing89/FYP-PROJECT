@@ -9,7 +9,7 @@ const MedState = (props) => {
   // Get all meds
   const getMeds = async () => {
     // API Call 
-    const response = await fetch(`${host}/fetchallmedicines`, {
+    const response = await fetch(`${host}/api/medicine/fetchallmedicines`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -21,15 +21,15 @@ const MedState = (props) => {
   }
 
   // Add a Medicine
-  const addMeds = async (title, description, tag) => {
+  const addMeds = async (MedicineName,Category,Price,Quantity) => {
  
-    const response = await fetch(`${host}/api/meds/addnote`, {
+    const response = await fetch(`${host}/api/medicine/addmedicines`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjEzMWRjNWUzZTQwMzdjZDQ3MzRhMDY2In0sImlhdCI6MTYzMDY2OTU5Nn0.hJS0hx6I7ROugkqjL2CjrJuefA3pJi-IU5yGUbRHI4Q"
+        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyMzVkMjk0ZDExZDZkM2VmMjUyNjczIn0sImlhdCI6MTY4MDAzOTI0MX0.tfHEbgo55lG_3f0OfH5BQ-jYGO9oaEi5xKfNL9bydro"
       },
-      body: JSON.stringify({title, description, tag})
+      body: JSON.stringify({MedicineName,Category,Price,Quantity})
     });
 
     const med = await response.json();
@@ -39,11 +39,11 @@ const MedState = (props) => {
   // Delete a Note
   const deleteMeds = async (id) => {
     // API Call
-    const response = await fetch(`${host}/api/meds/deletenote/${id}`, {
+    const response = await fetch(`${host}/api/medicine/deletemed/${id}`, {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjEzMWRjNWUzZTQwMzdjZDQ3MzRhMDY2In0sImlhdCI6MTYzMDY2OTU5Nn0.hJS0hx6I7ROugkqjL2CjrJuefA3pJi-IU5yGUbRHI4Q"
+        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyMzVkMjk0ZDExZDZkM2VmMjUyNjczIn0sImlhdCI6MTY4MDAzOTI0MX0.tfHEbgo55lG_3f0OfH5BQ-jYGO9oaEi5xKfNL9bydro"
       }
     });
     const json = response.json(); 
@@ -52,34 +52,35 @@ const MedState = (props) => {
   }
 
   // Edit a Note
-  const editMeds = async (id, title, description, tag) => {
+  const editMeds = async (id,MedicineName,Category,Price,Quantity) => {
     // API Call 
-    const response = await fetch(`${host}/api/meds/updatenote/${id}`, {
+    const response = await fetch(`${host}/api/medicine/updatemedicines/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjEzMWRjNWUzZTQwMzdjZDQ3MzRhMDY2In0sImlhdCI6MTYzMDY2OTU5Nn0.hJS0hx6I7ROugkqjL2CjrJuefA3pJi-IU5yGUbRHI4Q"
+        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyMzVkMjk0ZDExZDZkM2VmMjUyNjczIn0sImlhdCI6MTY4MDAzOTI0MX0.tfHEbgo55lG_3f0OfH5BQ-jYGO9oaEi5xKfNL9bydro"
       },
-      body: JSON.stringify({title, description, tag})
+      body: JSON.stringify({MedicineName,Category,Price,Quantity})
     });
     const json = await response.json(); 
-
+    
      let newmeds = JSON.parse(JSON.stringify(meds))
     // Logic to edit in client
     for (let index = 0; index < newmeds.length; index++) {
       const element = newmeds[index];
       if (element._id === id) {
-        newmeds[index].title = title;
-        newmeds[index].description = description;
-        newmeds[index].tag = tag; 
+        newmeds[index].MedicineName = MedicineName;
+        newmeds[index].Category = Category;
+        newmeds[index].Price = Price; 
+        newmeds[index].Quantity=Quantity;
         break; 
       }
     }  
-    setMeds(newmeds);
-  }
+    setMeds(newmeds); 
+  } 
 
   return (
-    < MedContext.Provider value={{ meds, addMeds, deleteMeds, editMeds, getMeds }}>
+    < MedContext.Provider value={{ meds,addMeds,deleteMeds,editMeds,getMeds,setMeds}}>
       {props.children}
     </MedContext.Provider>
   )

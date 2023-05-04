@@ -1,5 +1,5 @@
 import { createContext }  from "react";
 
-const noteContext = createContext();
+const Medcontext = createContext();
 
 export default Medcontext;

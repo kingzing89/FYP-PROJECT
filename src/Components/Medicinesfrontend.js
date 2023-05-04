@@ -1,71 +1,87 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import "../Styles/crud.css"
 import { Alert } from 'react-bootstrap';
+import Medcontext from '../context/meds/Medcontext';
+import MedState from '../context/meds/Medstate';
 function Medicinesfrontend() {
-  
- 
-  const [price,setPrice] =useState("");
-  const [medicinename,setMed] =useState("");
-  const [address,setAddress] =useState("");
-  const [quantity,setQuantity] =useState("");
+  const context= useContext(Medcontext);
+  const {meds,getMeds,setMeds,addMeds,deleteMeds,editMeds}=context;
+
+  useEffect(()=>{
+    getMeds();
+
+  },[])
+  const [Price,setPrice] =useState("");
+  const [MedicineName,setMed] =useState("");
+  const [Category,setCategory] =useState("");
+  const [Quantity,setQuantity] =useState("");
   const[edit,setEdit] = useState(false);
   const[active,setActive]=useState(null);
+  const[updateid,setUpdateid]=useState(null);
 
-  const [users,setUsers] = useState([]);
+  //const [users,setUsers] = useState([]);
   const addUser = (e) =>{
     e.preventDefault();
     const user ={
-      medicinename,
-      price,
-      address,
-      quantity
+      
+      MedicineName,
+      Price,
+      Category,
+      Quantity
     };
     if(edit){
       //update user
-      if(user.address=="" || user.medicinename=="" || user.price==""||user.quantity==""){
+      if(user.Category=="" || user.MedicineName=="" || user.Price==""||user.Quantity==""){
         alert("Empty fields entered");
       }
       else{
-        let copy =users;
-        Object.assign(copy[active],user)
-        setUsers([...copy]);
+        //let copy = meds;
+       // Object.assign(copy[active],user)
+        //setMeds([...copy]);
+        
+        //setActive(null);
+        editMeds(updateid,user.MedicineName,user.Category,user.Price,user.Quantity);
         setEdit(false);
-        setActive(null);
 
       }
       
     }else{
       //add user
-      if(user.address=="" || user.medicinename=="" || user.price==""||user.quantity==""){
+      if(user.Category=="" || user.MedicineName=="" || user.Price==""||user.Quantity==""){
         alert("Empty fields entered");
       }
       else{
-      setUsers([...users,user]);
+      addMeds(user.MedicineName,user.Category,user.Price,user.Quantity);
+      //setUsers([...users,user]);
       }
     }
     setMed("");
     setPrice("");
-    setAddress("");
+    setCategory("");
     setQuantity("");
     
   };
 
   const onEditClick = (index) =>{
-    const user=users[index];
-    setMed(user.medicinename);
-    setPrice(user.price);
-    setAddress(user.address);
-    setQuantity(user.quantity);
+    const user=meds[index];
+    setMed(user.MedicineName);
+    setPrice(user.Price);
+    setCategory(user.Category);
+    setQuantity(user.Quantity);
     setActive(index);
     setEdit(true);
+    setUpdateid(user._id);
+    
   };
 
   const deleteUser =(user) =>{
     if (window.confirm("Are you sure you want to delete ?"))
-    {
-      let copy =users.filter((item) =>item !==user);
+    { setEdit(false);
+  
+       deleteMeds(user._id);
+      //let copy =meds.filter((item) =>item !==user);
 
-      setUsers([...copy]);
+     /// setUsers([...copy]);
     }
   };
 
@@ -82,21 +98,21 @@ function Medicinesfrontend() {
           <form onSubmit={addUser}>
           <div className='form-group'>
               <label htmlFor=''>Medicine Name</label>
-              <input type='text' className='form-control'value={medicinename} onChange={(e)=>setMed(e.target.value)}  placeholder='Enter Medicine Name'/>
+              <input type='text' className='form-control'value={MedicineName} onChange={(e)=>setMed(e.target.value)}  placeholder='Enter Medicine Name'/>
             </div>
             <div className='form-group'>
               <label htmlFor=''>Price</label>
-              <span class="currencyinput"><input type="text" className='form-control value' name="currency"value={price} onChange={(e)=>setPrice(e.target.value)} placeholder='Enter price' /></span>
+              <span className="currencyinput"><input type="text" className='form-control value' name="currency"value={Price} onChange={(e)=>setPrice(e.target.value)} placeholder='Enter Price' /></span>
               
             </div>
             <div className='form-group'>
-              <label htmlFor=''>Address</label>
-              <input type='text' className='form-control'value={address} onChange={(e)=>setAddress(e.target.value)}  placeholder='Enter Address'/>
+              <label htmlFor=''>Category</label>
+              <input type='text' className='form-control'value={Category} onChange={(e)=>setCategory(e.target.value)}  placeholder='Enter Category'/>
             </div>  
             <div className='form-group'>
             <label htmlFor=''className="form-label">Quantity</label>
 
-            <input type="number" min="0.00" max="50" step="1"   value={quantity}  onChange={(e)=>setQuantity(e.target.value)}  className='mb-3  ml-3 mr-3 form-control'  placeholder='Enter Quantity'/>
+            <input type="number" min="0.00" max="10" step="1"   value={Quantity}  onChange={(e)=>setQuantity(e.target.value)}  className='mb-3  ml-3 mr-3 form-control'  placeholder='Enter Quantity'/>
             </div>  
             <button className='btn btn-success form-control'>
               {edit ? "Update" :"Add"}
@@ -109,7 +125,7 @@ function Medicinesfrontend() {
         <thead>
           <tr>
           <th>Medicine Name</th>
-          <th>Address</th>
+          <th>Category</th>
           <th>Price</th>
           <th>Quantity</th>
           <th>Edit</th>
@@ -119,14 +135,14 @@ function Medicinesfrontend() {
         
         <tbody>
           {
-            users.map((user,index)=>{
+            meds.map((user,index)=>{
               return(
                 
               <tr>
-                <td>{user.medicinename}</td>
-                <td>{user.address}</td>
-                <td>{user.price}</td>
-                <td>{user.quantity}</td>
+                <td>{user.MedicineName}</td>
+                <td>{user.Category}</td>
+                <td>{user.Price}</td>
+                <td>{user.Quantity}</td>
                 <td>
                   <button
                   className='btn btn-info'
