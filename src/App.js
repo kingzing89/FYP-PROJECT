@@ -7,6 +7,7 @@ import Medicinesfrontend from "./Components/Medicinesfrontend";
 import Profile from "./Components/Profile";
 import NavigationBar from "./Components/NavigationBar";
 import MedState from "./context/meds/Medstate";
+import Info from "./Components/Info";
 
 
 function App() {
@@ -28,7 +29,7 @@ function App() {
 
       <MedState>
       <Routes>
-       <Route path="/" element={<> <Login/></> } />
+       <Route path="/" element={<><Info/></> } />
     
         <Route path="/register" element={ <Register/> } />
         <Route path="/profile" element={<>  <NavigationBar/> <Profile/></> } />

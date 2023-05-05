@@ -11,6 +11,9 @@ var mongoose = require('mongoose');
 router.get("/fetchallshops", fetchuser, async (req, res) => {
 
     const shops = await Shop.find({ User: req.user.id })
+    if(shops.length===2){
+        res.status(401).json({message:"Error Occurred"});
+    }
     res.json(shops);
 
 
@@ -36,14 +39,14 @@ router.post("/addshops",fetchuser,[
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { ownername, shopname, phone, address,shopaddress,province,city } = req.body;
+        const { ownername, shopname, phone, address,shopaddress,province,city,myFile } = req.body;
 
         console.log(req.user.id);
 
         const userId = req.user.id;
         const shop = new Shop({
 
-            ownername, shopname, phone, address,shopaddress,province,city, User: userId
+            ownername, shopname, phone, address,shopaddress,province,city,myFile, User: userId
           
 
         })
@@ -135,19 +138,6 @@ router.delete('/deleteshops/:id', fetchuser, async (req, res) => {
         res.status(500).send("Internal Server Error");
     }
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -40,11 +40,15 @@ const shopSchema= new Schema({
         required:true,
 
     },
+    myFile:{
+        type:String,
+    },
     createdAt: {
         type: Date,
         default: () => Date.now(),
         
       },
+    
     User: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
