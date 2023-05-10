@@ -39,7 +39,7 @@ router.post("/addshops",fetchuser,[
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { ownername, shopname, phone, address,shopaddress,province,city,myFile } = req.body;
+        const { ownername, shopname, phone, address, shopaddress , province , city , myFile } = req.body;
 
         console.log(req.user.id);
 

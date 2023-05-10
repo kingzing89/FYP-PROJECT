@@ -1,58 +1,62 @@
 const mongoose = require('mongoose')
-const bcrypt =require('bcrypt')
-const validator= require('validator')
-const Schema=mongoose.Schema
+const bcrypt = require('bcrypt')
+const validator = require('validator')
+const Schema = mongoose.Schema
 
-const shopSchema= new Schema({
-    ownername:{
-        type:String,
-        required:true
-    },
-    shopname:{
-        type:String,
-        required:true
-    },
-
-    phone:{
-        type:Number,
-        required:true,
-        minlength:11,
-        maxlenth:11,
-        unique:true
-
-    },
-    address:{
-        type:String,
-        required:true
-
-    },
-    shopaddress:{
-        type:String,
+const shopSchema = new Schema({
+    ownername: {
+        type: String,
         required: true
     },
-    province:{
-        type:String,
-        required:true
+    shopname: {
+        type: String,
+        required: true
+    },
+
+    phone: {
+        type: Number,
+        required: true,
+        minlength: 11,
+        maxlenth: 11,
+        unique: true
 
     },
-    city:{
-        type:String,
-        required:true,
+    address: {
+        type: String,
+        required: true
 
     },
-    myFile:{
-        type:String,
+    shopaddress: {
+        type: String,
+        required: true
+    },
+    province: {
+        type: String,
+        required: true
+
+    },
+    city: {
+        type: String,
+        required: true,
+
+    },
+    myFile: {
+        type: String,
     },
     createdAt: {
         type: Date,
         default: () => Date.now(),
-        
-      },
-    
+
+    },
+
     User: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'user'
-     }
+    },
+    isApproved: {
+        type: Boolean,
+        default: false
+    }
 })
 /*
 shopSchema.statics.addshop= async function(ownername,shopname,email,password,phone,address1,shopaddress,province,city)
@@ -125,5 +129,5 @@ shopSchema.statics.allshop= async function()
     return shopuser
 }
 */
-const Shops = mongoose.model('Shop',shopSchema);
+const Shops = mongoose.model('Shop', shopSchema);
 module.exports = Shops;

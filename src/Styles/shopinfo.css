@@ -1,0 +1,39 @@
+.layout{
+   
+    margin-top: 50px;
+    width: 50px;
+   
+  
+   
+   
+    
+}
+
+.bar{
+    position: fixed;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    top: 5px;
+    left: 50px;
+    background-color: lightblue;
+    color: red;
+  
+
+    
+
+}
+
+.card{
+    position: fixed;
+    border: 2px solid black;
+    border-radius: 20%;
+    background-image: url(../Images/Backimage.jpg)  ;
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 50%;
+    
+  
+  
+    
+}

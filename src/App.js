@@ -8,6 +8,7 @@ import Profile from "./Components/Profile";
 import NavigationBar from "./Components/NavigationBar";
 import MedState from "./context/meds/Medstate";
 import Info from "./Components/Info";
+import Shopstate from "./context/meds/Shopstate";
 
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
   return (
     
     <div className="App">
-
+      <Shopstate>
       <MedState>
       <Routes>
        <Route path="/" element={<><Info/></> } />
@@ -38,6 +39,7 @@ function App() {
         
       </Routes>
       </MedState>
+      </Shopstate>
     
     
     </div>

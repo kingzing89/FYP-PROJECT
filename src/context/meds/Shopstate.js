@@ -1,5 +1,5 @@
-import MedContext from "./Medcontext";
-import { useState } from "react";
+import ShopContext from "./ShopContext";
+import { useState,use } from "react";
 
 const Shopstate = (props) => {
   const host = "http://localhost:5000"
@@ -20,16 +20,16 @@ const Shopstate = (props) => {
     setMeds(json)
   }
 
-  // Add a Medicine
-  const addShops = async (ownername, shopname, phone, address,shopaddress,province,city,myFile) => {
+  // Add a Shop
+  const addShops = async (ownername , shopname , phone , address , shopaddress, province, city, myFile) => {
  
-    const response = await fetch(`${host}/api/shopcon/addshops"`, {
+    const response = await fetch(`${host}/api/shopcon/addshops`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyMzVkMjk0ZDExZDZkM2VmMjUyNjczIn0sImlhdCI6MTY4MDAzOTI0MX0.tfHEbgo55lG_3f0OfH5BQ-jYGO9oaEi5xKfNL9bydro"
       },
-      body: JSON.stringify({ownername, shopname, phone, address,shopaddress,province,city,myFile})
+      body: JSON.stringify({ownername, shopname, phone , address , shopaddress , province , city , myFile })
     });
 
     const shop = await response.json();
@@ -63,7 +63,7 @@ const Shopstate = (props) => {
       body: JSON.stringify({MedicineName,Category,Price,Quantity})
     });
     const json = await response.json(); 
-    
+  
      let newmeds = JSON.parse(JSON.stringify(meds))
     // Logic to edit in client
     for (let index = 0; index < newmeds.length; index++) {
@@ -80,7 +80,7 @@ const Shopstate = (props) => {
   } 
 
   return (
-    <ShopContext.Provider value={{getShops,addShops,shops,setShops}}>
+    <ShopContext.Provider value={{addShops}}>
       {props.children}
     </ShopContext.Provider>
   )
