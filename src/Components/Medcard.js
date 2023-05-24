@@ -35,7 +35,7 @@ export default function Medcard() {
       }
     return (
         <div>
-            <MDBRow className='row-cols-1 row-cols-md-2 g-4 ms-5 '>
+            <MDBRow className='row-cols-1 row-cols-md-2 g-4 ms-5 mb-4 '>
                 {meds.map((user, index) => {
                     return (
 
