@@ -1,10 +1,11 @@
-.Card{
+.Card-profile{
     width: 300px;
     height: 500px;
     background: white;
     border-radius:10px ;
     border: 1px solid lightblue;
     margin: 10px 20px 10px 50px;
+    box-shadow: 0 0 20px 8px #d0d0d0;
 
 
    

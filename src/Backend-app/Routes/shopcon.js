@@ -11,9 +11,7 @@ var mongoose = require('mongoose');
 router.get("/fetchallshops", fetchuser, async (req, res) => {
 
     const shops = await Shop.find({ User: req.user.id })
-    if(shops.length===2){
-        res.status(401).json({message:"Error Occurred"});
-    }
+   
     res.json(shops);
 
 
@@ -25,9 +23,9 @@ router.post("/addshops",fetchuser,[
     body('ownername',"invalid  Name").isLength({ min: 5 }),
     body('shopname',"invalid  shopname").isLength({ min: 4 }),
     body('phone',"invalid phone").isNumeric().isLength({}),
-    body('address',"invalid  address").isLength({ min: 5 }),
+   
     body('shopaddress',"invalid  shopaddress").isLength({ min: 4 }),
-    body('province',"invalid  province").isLength({ min: 4 }),
+   
     body('city',"invalid city").isLength({ min: 4 })
 
 ], async (req, res) => {
@@ -39,14 +37,14 @@ router.post("/addshops",fetchuser,[
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { ownername, shopname, phone, address, shopaddress , province , city , myFile } = req.body;
+        const { ownername, shopname, phone, shopaddress , city , myFile ,myPresc } = req.body;
 
         console.log(req.user.id);
 
         const userId = req.user.id;
         const shop = new Shop({
 
-            ownername, shopname, phone, address,shopaddress,province,city,myFile, User: userId
+            ownername, shopname, phone,shopaddress,city,myFile,myPresc, User:userId
           
 
         })
@@ -55,7 +53,7 @@ router.post("/addshops",fetchuser,[
 
         res.json(savedshop)
     } catch {
-        console.error(error.message)
+        
         res.status(500).send("Internal server error");
 
     }

@@ -3,14 +3,14 @@ import "./Card.css"
 import  download from "./download.png"
 
 function Card(props) {
- 
+ console.log(props.image)
   return (
        
-    <div className='Card'>
+    <div className='Card-profile '>
        
       <div className='upper-container'>
         <div className='image-container'>
-        <img src={download} />;
+        <img src={props.image} />;
         </div>
       </div>
       <div className='lower-container'>
@@ -20,7 +20,7 @@ function Card(props) {
         <h3>{props.name}</h3>
         <h4>{props.Address}</h4>
         <p>{props.about}</p>
-        <button>Visit Profile</button>
+        
 
       </div>
     </div>

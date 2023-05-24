@@ -1,5 +1,5 @@
 import ShopContext from "./ShopContext";
-import { useState,use } from "react";
+import { useState } from "react";
 
 const Shopstate = (props) => {
   const host = "http://localhost:5000"
@@ -9,27 +9,28 @@ const Shopstate = (props) => {
   // Get all meds
   const getShops = async () => {
     // API Call 
-    const response = await fetch(`${host}/api/medicine/fetchallmedicines`, {
+    const response = await fetch(`${host}/api/shopcon/fetchallshops`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyMzVkMjk0ZDExZDZkM2VmMjUyNjczIn0sImlhdCI6MTY4MDAzOTI0MX0.tfHEbgo55lG_3f0OfH5BQ-jYGO9oaEi5xKfNL9bydro"
+        "auth-token": localStorage.getItem("token")
       }
     });
     const json = await response.json() 
-    setMeds(json)
+    console.log(typeof json[0].shopname);
+    setShops(json)
   }
 
   // Add a Shop
-  const addShops = async (ownername , shopname , phone , address , shopaddress, province, city, myFile) => {
+  const addShops = async (ownername , shopname , phone , shopaddress, city, myFile, myPresc) => {
  
     const response = await fetch(`${host}/api/shopcon/addshops`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyMzVkMjk0ZDExZDZkM2VmMjUyNjczIn0sImlhdCI6MTY4MDAzOTI0MX0.tfHEbgo55lG_3f0OfH5BQ-jYGO9oaEi5xKfNL9bydro"
+        "auth-token": localStorage.getItem("token")
       },
-      body: JSON.stringify({ownername, shopname, phone , address , shopaddress , province , city , myFile })
+      body: JSON.stringify({ownername, shopname, phone ,shopaddress , city , myFile, myPresc })
     });
 
     const shop = await response.json();
@@ -43,7 +44,7 @@ const Shopstate = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyMzVkMjk0ZDExZDZkM2VmMjUyNjczIn0sImlhdCI6MTY4MDAzOTI0MX0.tfHEbgo55lG_3f0OfH5BQ-jYGO9oaEi5xKfNL9bydro"
+        "auth-token": localStorage.getItem("token")
       }
     });
     const json = response.json(); 
@@ -58,7 +59,7 @@ const Shopstate = (props) => {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyMzVkMjk0ZDExZDZkM2VmMjUyNjczIn0sImlhdCI6MTY4MDAzOTI0MX0.tfHEbgo55lG_3f0OfH5BQ-jYGO9oaEi5xKfNL9bydro"
+        "auth-token": localStorage.getItem("token")
       },
       body: JSON.stringify({MedicineName,Category,Price,Quantity})
     });
@@ -80,7 +81,7 @@ const Shopstate = (props) => {
   } 
 
   return (
-    <ShopContext.Provider value={{addShops}}>
+    <ShopContext.Provider value={{addShops,getShops,shops,setShops}}>
       {props.children}
     </ShopContext.Provider>
   )

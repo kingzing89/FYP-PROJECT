@@ -1,7 +1,8 @@
 .layout{
    
     margin-top: 50px;
-    width: 50px;
+    width: 100%;
+   
    
   
    
@@ -22,16 +23,19 @@
 
 }
 
-.card{
-    position: fixed;
+.card-info{
+    
     border: 2px solid black;
-    border-radius: 20%;
+   
     background-image: url(../Images/Backimage.jpg)  ;
     background-repeat: no-repeat;
     background-position-x: center;
     background-size: cover;
     background-attachment: fixed;
-    width: 50%;
+    width: '100vw';
+    height:'100vh';
+    margin-right: auto;
+    margin-left: auto;
     
   
   

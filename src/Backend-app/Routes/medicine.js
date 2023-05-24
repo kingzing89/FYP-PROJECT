@@ -18,9 +18,13 @@ router.get("/fetchallmedicines", fetchuser, async (req, res) => {
 
 router.post("/addmedicines",fetchuser,[
     body('MedicineName', "invalid  Name").isLength({ min: 5 }),
+    body('Drugname', "invalid  Name").isLength({ min: 4 }),
+    body('Size', "invalid  Size").isLength({ min: 2 }),
+    body('Manufacture', "invalid  name").isLength({ min: 3 }),
     body('Category', "invalid  Category").isLength({ min: 4 }),
     body('Price', "invalid  price").isNumeric(),
     body('Quantity', "invalid  Quantity").isInt({ min: 1, max: 100 }),
+    
 
 ], async (req, res) => {
     try {
@@ -31,14 +35,14 @@ router.post("/addmedicines",fetchuser,[
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { MedicineName, Category, Price, Quantity } = req.body;
+        const { MedicineName,Drugname,Size,Manufacture,Category, Price, Quantity, ExpiryDate, myFile } = req.body;
 
         console.log(req.user.id);
 
         const userId = req.user.id;
         const medicine = new Medicines({
 
-           MedicineName, Category, Price, Quantity, User: userId
+           MedicineName,Drugname,Size,Manufacture,Category, Price, Quantity, ExpiryDate, myFile , User: userId
           
 
         })
@@ -64,21 +68,41 @@ router.put("/updatemedicines/:id",fetchuser,async (req, res) => {
    
         
 
-        const { MedicineName, Category, Price, Quantity } = req.body;
+        const { MedicineName, Drugname , Size , Manufacture , Category , Price , Quantity , ExpiryDate , myFile  } = req.body;
         const newMedicine={};
         if(MedicineName){
-            newMedicine.MedicineName=MedicineName;
+            newMedicine.MedicineName = MedicineName;
         }
         if(Category){
-            newMedicine.Category=Category;
+            newMedicine.Category = Category;
             
         }
         if(Price){
-            newMedicine.Price=Price;
+            newMedicine.Price = Price;
 
         }
         if(Quantity){
-            newMedicine.Quantity=Quantity;
+            newMedicine.Quantity = Quantity;
+
+        }
+        if(Drugname){
+            newMedicine.Drugname = Drugname;
+
+        }
+        if(Size){
+            newMedicine.Size = Size;
+
+        }
+        if(Manufacture){
+            newMedicine.Manufacture = Manufacture;
+
+        }
+        if(ExpiryDate){
+            newMedicine.ExpiryDate = ExpiryDate;
+
+        }
+        if(myFile){
+            newMedicine.myFile = myFile;
 
         }
         if( !mongoose.Types.ObjectId.isValid(req.params.id) ) return false;

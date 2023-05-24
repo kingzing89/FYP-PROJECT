@@ -10,6 +10,18 @@ const MedicinesSchema = new Schema({
       require: true
 
    },
+   Drugname:{
+      type:String,
+      require:true
+   },
+   Size:{
+      type:String,
+      require:true
+   },
+   Manufacture:{
+      type:String,
+      require:true
+   },
    Category: {
       type: String,
       require: true,
@@ -24,9 +36,17 @@ const MedicinesSchema = new Schema({
    Quantity: {
       type: Number,
       required: true,
-
-
    },
+   ExpiryDate:{
+      type:Date,
+      require:true
+   },
+
+   myFile: {
+      type: String,
+  },
+
+
    User: {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'user'

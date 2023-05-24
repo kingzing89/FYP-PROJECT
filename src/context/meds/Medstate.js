@@ -13,7 +13,7 @@ const MedState = (props) => {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyMzVkMjk0ZDExZDZkM2VmMjUyNjczIn0sImlhdCI6MTY4MDAzOTI0MX0.tfHEbgo55lG_3f0OfH5BQ-jYGO9oaEi5xKfNL9bydro"
+        "auth-token": localStorage.getItem('token')
       }
     });
     const json = await response.json() 
@@ -21,15 +21,15 @@ const MedState = (props) => {
   }
 
   // Add a Medicine
-  const addMeds = async (MedicineName,Category,Price,Quantity) => {
+  const addMeds = async ( MedicineName,Drugname,Size,Manufacture,Category, Price, Quantity, ExpiryDate,myFile ) => {
  
     const response = await fetch(`${host}/api/medicine/addmedicines`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyMzVkMjk0ZDExZDZkM2VmMjUyNjczIn0sImlhdCI6MTY4MDAzOTI0MX0.tfHEbgo55lG_3f0OfH5BQ-jYGO9oaEi5xKfNL9bydro"
+        "auth-token": localStorage.getItem('token')
       },
-      body: JSON.stringify({MedicineName,Category,Price,Quantity})
+      body: JSON.stringify({MedicineName,Drugname,Size,Manufacture,Category,Price,Quantity,ExpiryDate,myFile})
     });
 
     const med = await response.json();
@@ -43,7 +43,7 @@ const MedState = (props) => {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyMzVkMjk0ZDExZDZkM2VmMjUyNjczIn0sImlhdCI6MTY4MDAzOTI0MX0.tfHEbgo55lG_3f0OfH5BQ-jYGO9oaEi5xKfNL9bydro"
+        "auth-token": localStorage.getItem("token")
       }
     });
     const json = response.json(); 
@@ -52,15 +52,15 @@ const MedState = (props) => {
   }
 
   // Edit a Note
-  const editMeds = async (id,MedicineName,Category,Price,Quantity) => {
+  const editMeds = async (id, MedicineName,Drugname,Size,Manufacture,Category, Price, Quantity, ExpiryDate,myFile ) => {
     // API Call 
     const response = await fetch(`${host}/api/medicine/updatemedicines/${id}`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
-        "auth-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7ImlkIjoiNjQyMzVkMjk0ZDExZDZkM2VmMjUyNjczIn0sImlhdCI6MTY4MDAzOTI0MX0.tfHEbgo55lG_3f0OfH5BQ-jYGO9oaEi5xKfNL9bydro"
+        "auth-token": localStorage.getItem("token")
       },
-      body: JSON.stringify({MedicineName,Category,Price,Quantity})
+      body: JSON.stringify({MedicineName,Drugname,Size,Manufacture,Category,Price,Quantity,ExpiryDate,myFile})
     });
     const json = await response.json(); 
     
@@ -73,6 +73,12 @@ const MedState = (props) => {
         newmeds[index].Category = Category;
         newmeds[index].Price = Price; 
         newmeds[index].Quantity=Quantity;
+        newmeds[index].Drugname=Drugname;
+        newmeds[index].Size=Size;
+        newmeds[index].Manufacture=Manufacture;
+        newmeds[index].ExpiryDate=ExpiryDate;
+        newmeds[index].myFile=myFile;
+
         break; 
       }
     }  

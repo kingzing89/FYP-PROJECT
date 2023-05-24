@@ -9,6 +9,7 @@ import NavigationBar from "./Components/NavigationBar";
 import MedState from "./context/meds/Medstate";
 import Info from "./Components/Info";
 import Shopstate from "./context/meds/Shopstate";
+import Verificationcard from "./Components/Verificationcard";
 
 
 function App() {
@@ -30,11 +31,13 @@ function App() {
       <Shopstate>
       <MedState>
       <Routes>
-       <Route path="/" element={<><Info/></> } />
+       <Route path="/" element={<><Login/></> } />
     
         <Route path="/register" element={ <Register/> } />
         <Route path="/profile" element={<>  <NavigationBar/> <Profile/></> } />
         <Route path="/medicine" element={<> <NavigationBar/> <Medicinesfrontend/></> } />
+        <Route path="/verification" element={ <Verificationcard/> } />
+        <Route path="/Info" element={ <Info/> } />
       
         
       </Routes>

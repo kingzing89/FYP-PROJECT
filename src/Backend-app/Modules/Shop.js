@@ -21,20 +21,12 @@ const shopSchema = new Schema({
         unique: true
 
     },
-    address: {
-        type: String,
-        required: true
-
-    },
+  
     shopaddress: {
         type: String,
         required: true
     },
-    province: {
-        type: String,
-        required: true
 
-    },
     city: {
         type: String,
         required: true,
@@ -42,6 +34,9 @@ const shopSchema = new Schema({
     },
     myFile: {
         type: String,
+    },
+    myPresc:{
+        type:String
     },
     createdAt: {
         type: Date,

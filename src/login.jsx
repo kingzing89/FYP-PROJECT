@@ -23,7 +23,7 @@ export const Login =(props) => {
         console.log(json);
         if(json.success){
             localStorage.setItem("token",json.authtoken);
-            navigate("/profile");
+            navigate("/Info");
             
             
 
