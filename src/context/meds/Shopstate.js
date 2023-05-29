@@ -1,4 +1,4 @@
-import ShopContext from "./ShopContext";
+import ShopContext from "./Shopcontext";
 import { useState } from "react";
 
 const Shopstate = (props) => {

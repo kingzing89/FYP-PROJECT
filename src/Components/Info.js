@@ -2,7 +2,7 @@ import e from 'cors';
 import React, { createContext } from 'react'
 import { useContext, useState } from 'react';
 import "../Styles/shopinfo.css";
-import ShopContext from '../context/meds/ShopContext';
+import ShopContext from '../context/meds/Shopcontext';
 import Shopstate from '../context/meds/Shopstate';
 import axios from 'axios';
 

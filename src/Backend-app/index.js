@@ -57,6 +57,7 @@ app.use(express.json())
 app.use("/api/auth",require("./Routes/auth"));
 app.use("/api/medicine",require("./Routes/medicine"));
 app.use("/api/shopcon",require("./Routes/shopcon"));
+app.use("/api/purchasecon",require("./Routes/purchasecon"));
 
 
 

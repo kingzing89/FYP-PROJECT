@@ -3,7 +3,7 @@ import Card from './Card'
 import Navbar from './Navbar2'
 import { useContext } from 'react'
 import { MDBRow, MDBCol } from 'mdb-react-ui-kit';
-import ShopContext from '../context/meds/ShopContext'
+import ShopContext from '../context/meds/Shopcontext'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import Medcard from './Medcard'
