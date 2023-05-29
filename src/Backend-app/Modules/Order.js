@@ -1,6 +1,6 @@
 const mongoose=require('mongoose')
 const Medicines=require('./Medicines')
-const User=require('./user')
+const User=require('./shopuser')
 const Shop=require('./Shop')
 const Schema=mongoose.Schema
 

@@ -44,9 +44,9 @@ const shopSchema = new Schema({
 
     },
 
-    User: {
+    shopuser: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'user'
+        ref: 'shopuser'
     },
     isApproved: {
         type: Boolean,

@@ -5,39 +5,39 @@ const MedicinesSchema = new Schema({
 
  
 
-   MedicineName: {
+   medicinename: {
       type: String,
       require: true
 
    },
-   Drugname:{
+   drugname:{
       type:String,
       require:true
    },
-   Size:{
+   size:{
       type:String,
       require:true
    },
-   Manufacture:{
+   manufacture:{
       type:String,
       require:true
    },
-   Category: {
+   category: {
       type: String,
       require: true,
       default: "General"
    },
-   Price: {
+   price: {
       type: Number,
       required: true,
 
 
    },
-   Quantity: {
+   quantity: {
       type: Number,
       required: true,
    },
-   ExpiryDate:{
+   expirydate:{
       type:Date,
       require:true
    },
@@ -47,9 +47,9 @@ const MedicinesSchema = new Schema({
   },
 
 
-   User: {
+   shopuser: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'user'
+      ref: 'shopuser'
    }
 
 

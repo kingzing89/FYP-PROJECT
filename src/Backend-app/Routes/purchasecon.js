@@ -6,39 +6,6 @@ const  router= express.Router();
 const fetchuser = require("../middleware/fetchuser")
 
 
-router.post("/addorder",fetchuser,async(req,res)=>{
-
-    const {MedicineName,quantity,deliveryaddress}=req.body
-    try {
-      console.log(req.user.id);
-
-       
-        
-
-        const Medicines = await Medicine.find({User: req.user.id,MedicineName:MedicineName});
-
-        if(Medicines.Quantity > quantity)
-        {   let quant=Medicines.Quantity-quantity;
-            console.log(quant)
-            med= await Medicine.findOneAndUpdate({_id:Medicines._id},{Quantity:quant}, {new: true,upsert: true})
-            console.log(med)
-            const savedorder = await order.save();
-            res.json(savedorder)
-            
-           
-        }
-       
-
-
-    
-    } catch {
-        
-        res.status(500).send("Internal server error");
-
-    }
-
-    
-})
 router.get("/fetchallorders",fetchuser,async(req,res)=>{
    
     try {

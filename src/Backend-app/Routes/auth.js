@@ -2,7 +2,7 @@ const express = require("express")
 
 const router = express.Router()
 
-const User = require("../Modules/user")
+const User = require("../Modules/shopuser")
 var jwt = require('jsonwebtoken');
 
 

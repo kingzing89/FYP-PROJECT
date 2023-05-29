@@ -10,20 +10,20 @@ var mongoose = require('mongoose');
 // route to Add a new medicine USING POST
 router.get("/fetchallmedicines", fetchuser, async (req, res) => {
 
-    const meds = await Medicines.find({ User: req.user.id })
+    const meds = await Medicines.find({ shopuser: req.user.id })
     res.json(meds);
 
 
 })
 
 router.post("/addmedicines",fetchuser,[
-    body('MedicineName', "invalid  Name").isLength({ min: 5 }),
-    body('Drugname', "invalid  Name").isLength({ min: 4 }),
-    body('Size', "invalid  Size").isLength({ min: 2 }),
-    body('Manufacture', "invalid  name").isLength({ min: 3 }),
-    body('Category', "invalid  Category").isLength({ min: 4 }),
-    body('Price', "invalid  price").isNumeric(),
-    body('Quantity', "invalid  Quantity").isInt({ min: 1, max: 100 }),
+    body('medicinename', "invalid  name").isLength({ min: 5 }),
+    body('drugname', "invalid  name").isLength({ min: 4 }),
+    body('size', "invalid  size").isLength({ min: 2 }),
+    body('manufacture', "invalid  name").isLength({ min: 3 }),
+    body('category', "invalid  category").isLength({ min: 4 }),
+    body('price', "invalid  price").isNumeric(),
+    body('quantity', "invalid  quantity").isInt({ min: 1, max: 100 }),
     
 
 ], async (req, res) => {
@@ -35,14 +35,14 @@ router.post("/addmedicines",fetchuser,[
         if (!errors.isEmpty()) {
             return res.status(400).json({ errors: errors.array() });
         }
-        const { MedicineName,Drugname,Size,Manufacture,Category, Price, Quantity, ExpiryDate, myFile } = req.body;
+        const { medicinename,drugname,size,manufacture,category, price, quantity, expirydate, myFile } = req.body;
 
         console.log(req.user.id);
 
         const userId = req.user.id;
         const medicine = new Medicines({
 
-           MedicineName,Drugname,Size,Manufacture,Category, Price, Quantity, ExpiryDate, myFile , User: userId
+           medicinename,drugname,size,manufacture,category, price, quantity, expirydate, myFile , shopuser: userId
           
 
         })
@@ -68,37 +68,37 @@ router.put("/updatemedicines/:id",fetchuser,async (req, res) => {
    
         
 
-        const { MedicineName, Drugname , Size , Manufacture , Category , Price , Quantity , ExpiryDate , myFile  } = req.body;
+        const { medicinename,drugname,size,manufacture,category, price, quantity, expirydate, myFile  } = req.body;
         const newMedicine={};
-        if(MedicineName){
-            newMedicine.MedicineName = MedicineName;
+        if(medicinename){
+            newMedicine.medicinename = medicinename;
         }
-        if(Category){
-            newMedicine.Category = Category;
+        if(category){
+            newMedicine.category = category;
             
         }
-        if(Price){
-            newMedicine.Price = Price;
+        if(price){
+            newMedicine.price = price;
 
         }
-        if(Quantity){
-            newMedicine.Quantity = Quantity;
+        if(quantity){
+            newMedicine.quantity = quantity;
 
         }
-        if(Drugname){
-            newMedicine.Drugname = Drugname;
+        if(drugname){
+            newMedicine.drugname = drugname;
 
         }
-        if(Size){
-            newMedicine.Size = Size;
+        if(size){
+            newMedicine.size = size;
 
         }
-        if(Manufacture){
-            newMedicine.Manufacture = Manufacture;
+        if(manufacture){
+            newMedicine.manufacture = manufacture;
 
         }
-        if(ExpiryDate){
-            newMedicine.ExpiryDate = ExpiryDate;
+        if(expirydate){
+            newMedicine.expirydate = expirydate;
 
         }
         if(myFile){
@@ -112,9 +112,9 @@ router.put("/updatemedicines/:id",fetchuser,async (req, res) => {
         if (!med) {
             return res.status(404).json("Medicine Not Found");
         }
-        console.log(med.User)
+        console.log(med.shopuser)
 
-        if (med.User.toString() !== req.user.id){
+        if (med.shopuser.toString() !== req.user.id){
             return res.status(400).send("Access Denied")
         }
         
@@ -137,7 +137,7 @@ router.delete('/deletemed/:id', fetchuser, async (req, res) => {
         if (!med) { return res.status(404).send("Not Found") }
 
         // Allow deletion only if user owns this Note
-        if (med.User.toString() !== req.user.id) {
+        if (med.shopuser.toString() !== req.user.id) {
             return res.status(401).send("Not Allowed");
         }
 

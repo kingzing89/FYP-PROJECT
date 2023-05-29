@@ -10,7 +10,7 @@ var mongoose = require('mongoose');
 // route to fetch a new medicine USING GET
 router.get("/fetchallshops", fetchuser, async (req, res) => {
 
-    const shops = await Shop.find({ User: req.user.id })
+    const shops = await Shop.find({  shopuser: req.user.id })
    
     res.json(shops);
 
@@ -44,7 +44,7 @@ router.post("/addshops",fetchuser,[
         const userId = req.user.id;
         const shop = new Shop({
 
-            ownername, shopname, phone,shopaddress,city,myFile,myPresc, User:userId
+            ownername, shopname, phone,shopaddress,city,myFile,myPresc, shopuser:userId
           
 
         })
@@ -117,15 +117,15 @@ router.put("/updateshops/:id",fetchuser,async (req, res) => {
 
 
 
-// ROUTE 4: Delete an existing medicine using: DELETE "/api/medicine/deletenote". Login required
+// ROUTE 4: Delete an existing Shop using: DELETE "/api/medicine/deleteShop". Login required
 router.delete('/deleteshops/:id', fetchuser, async (req, res) => {
     try {
         // Find the med to be deleted and delete it
         let shop = await Shop.findById(req.params.id);
         if (!shop) { return res.status(404).send("Not Found") }
 
-        // Allow deletion only if user owns this Note
-        if (shop.User.toString() !== req.user.id) {
+        // Allow deletion only if user owns this Shop
+        if (shop.shopuser.toString() !== req.user.id) {
             return res.status(401).send("Not Allowed");
         }
 

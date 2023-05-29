@@ -3,7 +3,7 @@ const { Schema } = mongoose;
 
 
 
-const UserSchema = new Schema({
+const ShopUserSchema = new Schema({
 
      name:{
         type: String,
@@ -17,11 +17,11 @@ const UserSchema = new Schema({
      },
      password:{
         type:String,
-        require:true,
+        require:true
         
         
      },
-     Date:{
+     date:{
         type:Date,
         default:Date.now
 
@@ -31,7 +31,7 @@ const UserSchema = new Schema({
   });
 
 
-  const User = mongoose.model("user",UserSchema);
+  const User = mongoose.model("shopuser",ShopUserSchema);
 
   
 
