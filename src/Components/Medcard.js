@@ -44,7 +44,7 @@ export default function Medcard() {
                                 <MDBCardImage
 
                                     src={user.myFile}
-                                    alt={user.Drugname}
+                                    alt={user.drugname}
                                     onError={handleImgError}
                                    
                                     
@@ -53,11 +53,11 @@ export default function Medcard() {
                                     className='h-100'
                                 />
                                 <MDBCardBody className=''>
-                                    <MDBCardTitle className='mb-3'>{`Medicine Name: ${user.MedicineName}`}</MDBCardTitle>
+                                    <MDBCardTitle className='mb-3'>{`Medicine Name: ${user.medicinename}`}</MDBCardTitle>
                                     <MDBCardText>
-                                        <h5> {`Category: ${user.Category}\n`}</h5>
-                                        <h5> {`Price: ${user.Price}\n`}</h5>
-                                        <h5> {`Quantity: ${user.Quantity}\n`}</h5>
+                                        <h5> {`Category: ${user.category}\n`}</h5>
+                                        <h5> {`Price: ${user.price}\n`}</h5>
+                                        <h5> {`Quantity: ${user.quantity}\n`}</h5>
 
 
                                     </MDBCardText>

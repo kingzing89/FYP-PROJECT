@@ -21,7 +21,7 @@ const MedState = (props) => {
   }
 
   // Add a Medicine
-  const addMeds = async ( MedicineName,Drugname,Size,Manufacture,Category, Price, Quantity, ExpiryDate,myFile ) => {
+  const addMeds = async ( medicinename,drugname,size,manufacture,category, price, quantity, expirydate,myFile ) => {
  
     const response = await fetch(`${host}/api/medicine/addmedicines`, {
       method: 'POST',
@@ -29,7 +29,7 @@ const MedState = (props) => {
         'Content-Type': 'application/json',
         "auth-token": localStorage.getItem('token')
       },
-      body: JSON.stringify({MedicineName,Drugname,Size,Manufacture,Category,Price,Quantity,ExpiryDate,myFile})
+      body: JSON.stringify({medicinename,drugname,size,manufacture,category,price,quantity,expirydate,myFile})
     });
 
     const med = await response.json();
@@ -52,7 +52,7 @@ const MedState = (props) => {
   }
 
   // Edit a Note
-  const editMeds = async (id, MedicineName,Drugname,Size,Manufacture,Category, Price, Quantity, ExpiryDate,myFile ) => {
+  const editMeds = async (id, medicinename,drugname,size,manufacture,category, price, quantity, expirydate,myFile ) => {
     // API Call 
     const response = await fetch(`${host}/api/medicine/updatemedicines/${id}`, {
       method: 'PUT',
@@ -60,7 +60,7 @@ const MedState = (props) => {
         'Content-Type': 'application/json',
         "auth-token": localStorage.getItem("token")
       },
-      body: JSON.stringify({MedicineName,Drugname,Size,Manufacture,Category,Price,Quantity,ExpiryDate,myFile})
+      body: JSON.stringify({medicinename,drugname,size,manufacture,category,price,quantity,expirydate,myFile})
     });
     const json = await response.json(); 
     
@@ -69,14 +69,14 @@ const MedState = (props) => {
     for (let index = 0; index < newmeds.length; index++) {
       const element = newmeds[index];
       if (element._id === id) {
-        newmeds[index].MedicineName = MedicineName;
-        newmeds[index].Category = Category;
-        newmeds[index].Price = Price; 
-        newmeds[index].Quantity=Quantity;
-        newmeds[index].Drugname=Drugname;
-        newmeds[index].Size=Size;
-        newmeds[index].Manufacture=Manufacture;
-        newmeds[index].ExpiryDate=ExpiryDate;
+        newmeds[index].medicinename = medicinename;
+        newmeds[index].category = category;
+        newmeds[index].price = price; 
+        newmeds[index].quantity=quantity;
+        newmeds[index].drugname=drugname;
+        newmeds[index].size=size;
+        newmeds[index].manufacture=manufacture;
+        newmeds[index].expirydate=expirydate;
         newmeds[index].myFile=myFile;
 
         break; 

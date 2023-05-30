@@ -17,7 +17,7 @@ const Shopstate = (props) => {
       }
     });
     const json = await response.json() 
-    console.log(typeof json[0].shopname);
+    console.log(json[0].shopname);
     setShops(json)
   }
 

@@ -24,14 +24,14 @@ function Medicinesfrontend() {
 
 
   }, [])
-  const [Price, setPrice] = useState("");
-  const [MedicineName, setMed] = useState("");
-  const [Category, setCategory] = useState("");
-  const [Quantity, setQuantity] = useState("");
-  const [Drugname, setDrugName] = useState("");
-  const [Size, setSize] = useState("");
-  const [Manufacture, setManufacture] = useState("");
-  const [ExpiryDate, setexpiryDate] = useState("");
+  const [price, setPrice] = useState("");
+  const [medicinename, setMed] = useState("");
+  const [category, setCategory] = useState("");
+  const [quantity, setQuantity] = useState("");
+  const [drugname, setDrugName] = useState("");
+  const [size, setSize] = useState("");
+  const [manufacture, setManufacture] = useState("");
+  const [expirydate, setexpiryDate] = useState("");
   const [edit, setEdit] = useState(false);
   const [active, setActive] = useState(null);
   const [updateid, setUpdateid] = useState(null);
@@ -56,19 +56,19 @@ function Medicinesfrontend() {
     e.preventDefault();
     const user = {
 
-      MedicineName,
-      Price,
-      Category,
-      Quantity,
-      Drugname,
-      Size,
-      Manufacture,
-      ExpiryDate,
+      medicinename,
+      price,
+      category,
+      quantity,
+      drugname,
+      size,
+      manufacture,
+      expirydate,
 
     };
     if (edit) {
       //update user
-      if (user.Category == "" || user.MedicineName == "" || user.Price == "" || user.Quantity == "") {
+      if (user.category == "" || user.medicinename == "" || user.price == "" || user.quantity == "") {
         alert("Empty fields entered");
       }
       else {
@@ -84,7 +84,7 @@ function Medicinesfrontend() {
 
         })
           .then((response) => {
-            editMeds(updateid,user.MedicineName, user.Drugname, user.Size, user.Manufacture, user.Category, user.Price, user.Quantity, user.ExpiryDate, response.data.Image[0].filename);
+            editMeds(updateid,user.medicinename, user.drugname, user.size, user.manufacture, user.category, user.price, user.quantity, user.expirydate, response.data.Image[0].filename);
             setEdit(false);
             
 
@@ -103,7 +103,7 @@ function Medicinesfrontend() {
 
     } else {
       //add user
-      if (user.Category == "" || user.MedicineName == "" || user.Price == "" || user.Quantity == "") {
+      if (user.category == "" || user.medicinename == "" || user.price == "" || user.quantity == "") {
         alert("Empty fields entered");
       }
       else {
@@ -120,7 +120,7 @@ function Medicinesfrontend() {
         })
           .then((response) => {
             console.log(response.data.Image[0].filename);
-            addMeds(user.MedicineName, user.Drugname, user.Size, user.Manufacture, user.Category, user.Price, user.Quantity, user.ExpiryDate, response.data.Image[0].filename);
+            addMeds(user.medicinename, user.drugname, user.size, user.manufacture, user.category, user.price, user.quantity, user.expirydate, response.data.Image[0].filename);
 
 
 
@@ -201,40 +201,40 @@ function Medicinesfrontend() {
             <form onSubmit={addUser}>
               <div className='form-group'>
                 <label htmlFor=''><b>Medicine Name</b></label>
-                <input type='text' className='form-control' value={MedicineName} onChange={(e) => setMed(e.target.value)} placeholder='Enter Medicine Name' />
+                <input type='text' className='form-control' value={medicinename} onChange={(e) => setMed(e.target.value)} placeholder='Enter Medicine Name' />
               </div>
               <div className='form-group'>
                 <label htmlFor=''><b>Drug Name</b></label>
-                <input type='text' className='form-control' value={Drugname} onChange={(e) => setDrugName(e.target.value)} placeholder='Enter Drug Name' />
+                <input type='text' className='form-control' value={drugname} onChange={(e) => setDrugName(e.target.value)} placeholder='Enter Drug Name' />
               </div>
               <div className='form-group'>
                 <label htmlFor=''><b>Size</b></label>
-                <input type='text' className='form-control' value={Size} onChange={(e) => setSize(e.target.value)} placeholder='Enter Size' />
+                <input type='text' className='form-control' value={size} onChange={(e) => setSize(e.target.value)} placeholder='Enter Size' />
               </div>
               <div className='form-group'>
                 <label htmlFor=''><b>Manufacture Name</b></label>
-                <input type='text' className='form-control' value={Manufacture} onChange={(e) => setManufacture(e.target.value)} placeholder='Enter Manufacture Name ' />
+                <input type='text' className='form-control' value={manufacture} onChange={(e) => setManufacture(e.target.value)} placeholder='Enter Manufacture Name ' />
               </div>
 
 
               <div className='form-group '>
                 <label htmlFor=''><b>Price</b></label>
-                <span className="currencyinput"><input type="text" className='form-control value' name="currency" value={Price} onChange={(e) => setPrice(e.target.value)} placeholder='Enter Price' /></span>
+                <span className="currencyinput"><input type="text" className='form-control value' name="currency" value={price} onChange={(e) => setPrice(e.target.value)} placeholder='Enter Price' /></span>
 
               </div>
               <div className='form-group'>
                 <label htmlFor=''><b>Category</b></label>
-                <input type='text' className='form-control' value={Category} onChange={(e) => setCategory(e.target.value)} placeholder='Enter Category' />
+                <input type='text' className='form-control' value={category} onChange={(e) => setCategory(e.target.value)} placeholder='Enter Category' />
               </div>
               <div className='form-group'>
                 <label htmlFor='' className="form-label"><b>Quantity</b></label>
 
-                <input type="number" min="0.00" max="10" step="1" value={Quantity} onChange={(e) => setQuantity(e.target.value)} className='mb-3  ml-3 mr-3 form-control' placeholder='Enter Quantity' />
+                <input type="number" min="0.00" max="10" step="1" value={quantity} onChange={(e) => setQuantity(e.target.value)} className='mb-3  ml-3 mr-3 form-control' placeholder='Enter Quantity' />
               </div>
 
               <div className='form-group'>
                 <label htmlFor='Expiry'><b> Expiry Date</b></label>
-                <input type='Date' className='form-control' value={ExpiryDate} onChange={(e) => setexpiryDate(e.target.value)} placeholder='Enter Expiry Date' />
+                <input type='Date' className='form-control' value={expirydate} onChange={(e) => setexpiryDate(e.target.value)} placeholder='Enter Expiry Date' />
               </div>
 
               <div className='form-group'>
@@ -272,14 +272,14 @@ function Medicinesfrontend() {
               return (
 
                 <tr>
-                  <td>{user.MedicineName}</td>
-                  <td>{user.Category}</td>
-                  <td>{user.Price}</td>
-                  <td>{user.Quantity}</td>
-                  <td>{user.Drugname}</td>
-                  <td>{user.Size}</td>
-                  <td>{user.Manufacture}</td>
-                  <td>{user.ExpiryDate}</td>
+                  <td>{user.medicinename}</td>
+                  <td>{user.category}</td>
+                  <td>{user.price}</td>
+                  <td>{user.quantity}</td>
+                  <td>{user.drugname}</td>
+                  <td>{user.size}</td>
+                  <td>{user.manufacture}</td>
+                  <td>{user.expirydate}</td>
                   <td>
                     <button
                       className='btn btn-info'
